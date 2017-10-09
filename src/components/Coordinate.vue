@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'coordinate',
   data() {
@@ -35,9 +37,14 @@ export default {
       this.dialogOpen = true
     },
     onSubmit: function(e) {
-      console.log(this.clickRect.x)
-      console.log(this.clickRect.y)
-      console.log(this.selectedValue)
+      const { clickRect, selectedValue } = this
+      axios.post("/api", {
+        clickRect, selectedValue
+      }).then(({ data }) => {
+        window.alert(data.message)
+        this.clickRect = { x: 0, y: 0 }
+        this.selectedValue = null
+      })
     }
   }
 }
