@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <router-view></router-view>
+    <app-nav :title="title" />
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
 <script>
+import NavBar from "./NavBar.vue"
 export default {
   name: 'app',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      title: "サンプル"
     }
+  },
+  components: {
+    'app-nav': NavBar
   }
 }
 </script>
@@ -24,7 +29,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
+  main {
+    margin-top: 50px;
+  }
 }
 
 h1, h2 {

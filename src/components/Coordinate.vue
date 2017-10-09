@@ -1,6 +1,5 @@
 <template>
   <div id="coordinate">
-    <router-link to="/">トップ</router-link>
     <div class="box" ref="box" @click="onClick">
     </div>
     <b-modal title="送信ダイアログ" v-model="dialogOpen" @ok="onSubmit">
