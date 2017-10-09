@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState, mapActions } from "vuex"
 
 export default {
   name: 'coordinate',
   data() {
     return {
-      pinnedItems: [],
       dialogOpen: false,
       clickRect: { x: 0, y: 0 },
       selectedValue: null,
@@ -28,7 +27,9 @@ export default {
       ]
     }
   },
+  computed: mapState([ 'pinnedItems']),
   methods: {
+    ...mapActions(['postPinnedItem']),
     getIconStyle: function(pinnedItem) {
       const width = 30;
       const height = 30;
@@ -49,13 +50,9 @@ export default {
     },
     onSubmit: function(e) {
       const { clickRect, selectedValue } = this
-      axios.post("/api", {
-        clickRect, selectedValue
-      }).then(({ data }) => {
-        this.pinnedItems.push(this.clickRect)
-        this.clickRect = { x: 0, y: 0 }
-        this.selectedValue = null
-      })
+      this.postPinnedItem({ clickRect, selectedValue })
+      this.clickRect = { x: 0, y: 0 }
+      this.selectedValue = null
     }
   }
 }
