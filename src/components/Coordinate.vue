@@ -50,7 +50,7 @@ export default {
     },
     onSubmit: function(e) {
       const { clickRect, selectedValue } = this
-      this.postPinnedItem({ clickRect, selectedValue })
+      this.postPinnedItem({ ...clickRect, selectedValue })
       this.clickRect = { x: 0, y: 0 }
       this.selectedValue = null
     }

@@ -1,8 +1,14 @@
 import axios from 'axios'
 
-export function postValue({ clickRect, selectedValue }) {
+export function postPinnedItem({ x, y, selectedValue }) {
   return axios.post("/api", {
-    clickRect,
+    x,
+    y,
     selectedValue
   });
+}
+
+
+export function getPinnedItems() {
+  return axios.get("/api/pinned_items")
 }

@@ -14,3 +14,5 @@ new Vue({
   store,
   render: h => h(App)
 });
+
+store.dispatch("getPinnedItems")

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { postValue } from "@/api";
+import { postPinnedItem, getPinnedItems } from "@/api";
 
 Vue.use(Vuex);
 
@@ -18,10 +18,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    postPinnedItem({ commit }, { clickRect, selectedValue }) {
-      postValue({ clickRect, selectedValue }).then(({ data }) => {
-        commit(types.ADD_PINNED_ITEM, clickRect);
+    postPinnedItem({ commit }, item) {
+      postPinnedItem(item).then(({ data }) => {
+        commit(types.ADD_PINNED_ITEM, item);
       });
+    },
+    getPinnedItems({ commit }) {
+      getPinnedItems().then(({ data }) => {
+        data.forEach((d) => commit(types.ADD_PINNED_ITEM, d))
+      })
     }
   }
 });
